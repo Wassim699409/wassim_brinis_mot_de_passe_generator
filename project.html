@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Générateur de mots de passe</title>
+</head>
+<body>
+   <div class="container"> 
+    <h1>🔐 Générateur de mots de passe</h1> 
+    <input type="text" readonly id="mdp" placeholder="votre mot de passe" >
+    <button type="button" id="copy">copier</button><br>
+    <label>
+      Longeur: 
+    <input type="number" id="length" min="4" max="50" ></label><br>
+    <div class="options">
+      <label><input type="checkbox" id="lowercase" checked>Lettres Miniscules</label><br>
+      <label><input type="checkbox" id="uppercase" checked>Lettres Majuscules</label><br>
+      <label><input type="checkbox" id="Symboles">Symboles</label><br>
+      <label><input type="checkbox" id="chiffres">Chiffres</label><br>
+    </div>   
+    <button type="button" id="generate">Générer le mot de passe</button> 
+    <p id="feedback"></p>   
+  </div>
+ 
+</body>
+</html>
