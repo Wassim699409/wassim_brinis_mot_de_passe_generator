@@ -11,7 +11,7 @@
     <button type="button" id="copy">copier</button><br>
     <label>
       Longeur: 
-    <input type="number" id="length" min="4" max="50" ></label><br>
+    <input type="number" id="length" min="4" max="50"  value="4" ></label><br>
     <div class="options">
       <label><input type="checkbox" id="lowercase" checked>Lettres Miniscules</label><br>
       <label><input type="checkbox" id="uppercase" checked>Lettres Majuscules</label><br>
@@ -110,6 +110,9 @@
  
   }
   #feedback {
+  position: absolute;
+  top: 92%;
+  left: 21%;
   margin-top: 10px;
   font-size: 0.9rem;
   color: #a8ff60;
@@ -117,6 +120,55 @@
   
    
   </style>
+  <script>
+   const passwordInput = document.getElementById('mdp');
+   const lengthInput = document.getElementById('length');
+   const lowercaseCheckbox = document.getElementById('lowercase');
+   const uppercaseCheckbox = document.getElementById('uppercase');
+   const numbersCheckbox = document.getElementById('chiffres');
+   const symbolsCheckbox = document.getElementById('Symboles');
+   const generateBtn = document.getElementById('generate');
+   const copyBtn = document.getElementById('copy');
+   const feedback = document.getElementById('feedback');
+
+   function generatePassword() {
+     let chars = '';
+     if (lowercaseCheckbox.checked) chars += 'abcdefghijklmnopqrstuvwxyz';
+     if (uppercaseCheckbox.checked) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+     if (numbersCheckbox.checked) chars += '0123456789';
+     if (symbolsCheckbox.checked) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+
+     const length = parseInt(lengthInput.value);
+     if (!chars) {
+        feedback.textContent = "Veuillez cocher au moins une option !";
+        passwordInput.value = '';
+        return;
+    }
+
+    let password = '';
+    for (let i = 0; i < length; i++) {
+        password += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+
+    passwordInput.value = password;
+    feedback.textContent = "Mot de passe généré avec succès !";
+  }
+
+  function copyPassword() {
+    if (!passwordInput.value) {
+        feedback.textContent = "Aucun mot de passe à copier !";
+        return;
+    }
+    passwordInput.select();
+    passwordInput.setSelectionRange(0, 99999); // Pour mobile
+    document.execCommand('copy');
+    feedback.textContent = "Mot de passe copié dans le presse-papier !";
+}
+
+   generateBtn.addEventListener('click', generatePassword);
+   copyBtn.addEventListener('click', copyPassword);
+
+  </script>
 
 </body>
 </html>
